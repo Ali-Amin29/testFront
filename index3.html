@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            var dateFormat = "mm/dd/yy",
+                from = $("#from")
+                    .datepicker({
+                        defaultDate: "+1w",
+                        changeMonth: true,
+                        numberOfMonths: 3
+                    })
+                    .on("change", function () {
+                        to.datepicker("option", "minDate", getDate(this));
+                    }),
+                to = $("#to").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 3
+                })
+                    .on("change", function () {
+                        from.datepicker("option", "maxDate", getDate(this));
+                    });
+
+            function getDate(element) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate(dateFormat, element.value);
+                } catch (error) {
+                    date = null;
+                }
+
+                return date;
+            }
+        });
+    </script>
+    <style>
+        #totalmIN,
+        #total {
+            width: 150px !important;
+            height: 50px !important;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-4">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false" onClick="calc()">
+                        Select All
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item">Ali</a></li>
+                        <li><a class="dropdown-item">esraa</a></li>
+                        <li><a class="dropdown-item">eman</a></li>
+                        <li><a class="dropdown-item">gamal</a></li>
+                        <li><a class="dropdown-item">yasmin</a></li>
+                        <li><a class="dropdown-item">Jasmin</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-4 w-50">
+                <button class="btn btn-primary" id="total"></button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false" onClick="show()">
+                        New
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="date" style="display:none;">
+
+                        <li>
+                            <p><label for="from">From</label>
+                                <input type="text" id="from" name="from" oninput="getValueFrom()">
+                            </p>
+                        </li>
+                        <li>
+                            <p><label for="to">to</label>
+                                <input type="text" id="to" name="to" oninput="getValueTo()">
+                            </p>
+                        </li>
+                        <li>
+                            <button type="submit" id="setTime" class="btn btn-success" onClick="calcTime()">SEt</button>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-4">
+
+                <button class="btn btn-primary" id="totalmIN"></button>
+            </div>
+        </div>
+        <script>
+            function calc() {
+                let body = document.querySelectorAll('.dropdown-item');
+                let total = document.getElementById('total');
+                total.innerText = body.length + " PERSONS";
+            }
+            function show() {
+                let date = document.getElementById('date');
+                date.style.display = 'block';
+
+            }
+            let from = document.getElementById('from');
+            function getValueFrom() {
+                console.log(from.value);
+            }
+            let to = document.getElementById('to');
+            function getValueTo() {
+                console.log(to.value);
+            }
+
+
+            function calcTime() {
+                // console.log(to.value);
+                var date1 = new Date(to.value);
+                // console.log(date1.getTime());
+                var date2 = new Date(from.value);
+                // To calculate the time difference of two dates
+                var Difference_In_Time = date1.getTime() - date2.getTime();
+                let res = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
+                let totalmIN = document.getElementById('totalmIN');
+                totalmIN.innerText = res + 'days';
+            }
+
+
+
+            // console.log(typeof (window.location.href));
+            // console.log(window.location.href);
+            // let url = window.location.href;
+            // let path = url.slice(34, -1);
+            // let update = path.replace(/^\.%2F\./g, ' ');
+            // let arr = update.split('&');
+            // console.log(update);
+            // console.log(path);
+
+
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

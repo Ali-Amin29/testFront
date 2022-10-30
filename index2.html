@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Select or Deselect all or some checkboxes as per your mood:</h3>
+    <input type="checkbox" name="chk" class="happy" value="Smile">Smile<br>
+    <input type="checkbox" name="chk" class="sad" value="Cry">Cry<br>
+    <input type="checkbox" name="chk" class="happy" value="Laugh">Laugh<br>
+    <input type="checkbox" name="chk" class="sad" value="Angry">Angry<br>
+    <br>
+    <input type="button" onclick='selects()' value="Select All" />
+    <input type="button" onclick='deSelect()' value="Deselect All" />
+    <input type="button" onclick='happySelect()' value="Happy All" />
+    <input type="button" onclick='sadSelect()' value="Sad All" />
+
+
+
+    <script>
+        function selects() {
+            var ele = document.getElementsByName('chk');
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].type == 'checkbox')
+                    ele[i].checked = true;
+            }
+        }
+        function deSelect() {
+            var ele = document.getElementsByName('chk');
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].type == 'checkbox')
+                    ele[i].checked = false;
+
+            }
+        }
+        function happySelect() {
+            var ele = document.querySelectorAll('.happy');
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].type == 'checkbox')
+                    ele[i].checked = true;
+            }
+        }
+        function sadSelect() {
+            var ele = document.querySelectorAll('.sad');
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].type == 'checkbox')
+                    ele[i].checked = true;
+            }
+        }            
+    </script>
+</body>
+
+</html>
